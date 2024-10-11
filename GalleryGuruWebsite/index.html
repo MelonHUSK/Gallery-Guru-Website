@@ -50,7 +50,7 @@
     <script>
         // Fetch uploaded photos from Netlify function
         async function fetchPhotos() {
-            const response = await fetch('/.netlify/functions/getImages'); // Update URL to match your function path
+            const response = await fetch('/.netlify/functions/getImages');
             const images = await response.json();
 
             const galleryDiv = document.getElementById('gallery');
