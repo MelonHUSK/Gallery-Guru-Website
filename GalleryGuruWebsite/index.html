@@ -5,7 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery Guru</title>
     <style>
-        /* Basic styles for the gallery */
+        /* Basic styles for the gallery and header */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .gallery-container {
+            padding: 20px;
+        }
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -19,8 +37,16 @@
     </style>
 </head>
 <body>
-    <h1>Uploaded Photos</h1>
-    <div class="gallery" id="gallery"></div>
+    <!-- Add a header with a title -->
+    <div class="header">
+        <h1>Welcome to Gallery Guru</h1>
+        <p>Your Photo Uploads and Gallery</p>
+    </div>
+
+    <div class="gallery-container">
+        <h2>Uploaded Photos</h2>
+        <div class="gallery" id="gallery"></div>
+    </div>
 
     <script>
         // Fetch uploaded photos from Netlify function
