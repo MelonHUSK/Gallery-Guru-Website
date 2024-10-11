@@ -1,24 +1,24 @@
-let imageStore = []; // In-memory storage for uploaded images (base64)
+const { Handler } = require('netlify-lambda');
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
+const app = express();
+const storage = multer.memoryStorage(); // Use memory storage for serverless functions
+const upload = multer({ storage: storage }).single('photo');
 
 exports.handler = async (event, context) => {
-  try {
-    const body = JSON.parse(event.body);
-    const imageData = body.image; // Base64-encoded image
-
-    // Add the uploaded image to the in-memory store
-    imageStore.push({
-      id: Date.now(), // Unique ID for the image
-      data: imageData
+  return new Promise((resolve, reject) => {
+    upload(event, context, (err) => {
+      if (err) {
+        reject({ statusCode: 400, body: JSON.stringify(err) });
+      } else {
+        // Process the file here
+        resolve({
+          statusCode: 200,
+          body: JSON.stringify({ message: 'File uploaded successfully' })
+        });
+      }
     });
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "Photo uploaded successfully!" }),
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: "Error uploading photo" }),
-    };
-  }
+  });
 };
