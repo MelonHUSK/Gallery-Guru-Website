@@ -37,7 +37,6 @@
     </style>
 </head>
 <body>
-    <!-- Add a header with a title -->
     <div class="header">
         <h1>Welcome to Gallery Guru</h1>
         <p>Your Photo Uploads and Gallery</p>
@@ -51,7 +50,7 @@
     <script>
         // Fetch uploaded photos from Netlify function
         async function fetchPhotos() {
-            const response = await fetch('GalleryGuruWebsite/netlify/functions/getImages');
+            const response = await fetch('/.netlify/functions/getImages'); // Update URL to match your function path
             const images = await response.json();
 
             const galleryDiv = document.getElementById('gallery');
@@ -62,7 +61,7 @@
             // Loop through the images and add them to the page
             images.forEach((image) => {
                 const img = document.createElement('img');
-                img.src = `data:image/jpeg;base64,${image.data}`;
+                img.src = `data:image/jpeg;base64,${image.data}`; // Ensure the correct image data format
                 galleryDiv.appendChild(img);
             });
         }
